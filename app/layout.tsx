@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "./providers";
 import { Nav } from "./components/nav";
+import { UserProvider } from "@auth0/nextjs-auth0/client";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,14 +19,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <Providers>
-          <Nav />
-          <main className="flex justify-center py-6">
-            <div className="w-full max-w-[1024px]">{children}</div>
-          </main>
-        </Providers>
-      </body>
+      <UserProvider>
+        <body className={inter.className}>
+          <Providers>
+            <Nav />
+            <main className="flex justify-center py-6">
+              <div className="w-full max-w-[1024px]">{children}</div>
+            </main>
+          </Providers>
+        </body>
+      </UserProvider>
     </html>
   );
 }

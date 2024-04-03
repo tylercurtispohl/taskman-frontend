@@ -1,8 +1,13 @@
 import { BoardT } from "@/app/types";
+import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export default async function Page({ params }: { params: { id: number } }) {
+export default withPageAuthRequired(async function Page({
+  params,
+}: {
+  params: { id: number };
+}) {
   const { id } = params;
 
   const response = await fetch(`${baseUrl}/api/board/${id}`);
@@ -18,4 +23,4 @@ export default async function Page({ params }: { params: { id: number } }) {
         ))}
     </div>
   );
-}
+} as any);
