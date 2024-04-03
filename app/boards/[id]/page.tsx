@@ -1,14 +1,15 @@
 import { BoardT } from "@/app/types";
 import { getSession, withPageAuthRequired } from "@auth0/nextjs-auth0";
+import { redirect } from "next/navigation";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export default withPageAuthRequired(async function Page({
-  params,
-}: {
-  params: { id: number };
-}) {
-  const { id } = params;
+export default withPageAuthRequired(async function Page({ params }) {
+  const id = params?.id;
+
+  if (!id) {
+    redirect("/boards");
+  }
 
   const response = await fetch(`${baseUrl}/api/board/${id}`);
   const board = (await response.json()) as BoardT;
@@ -23,4 +24,4 @@ export default withPageAuthRequired(async function Page({
         ))}
     </div>
   );
-} as any);
+});
