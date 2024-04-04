@@ -8,6 +8,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import Image from "next/image";
+import { AuthButtons } from "./auth/authButtons";
 
 export const Nav = () => {
   return (
@@ -50,6 +51,9 @@ export const Nav = () => {
             Sign Up
           </Button>
         </NavbarItem> */}
+        <NavbarItem>
+          <AuthButtons />
+        </NavbarItem>
       </NavbarContent>
     </Navbar>
   );
