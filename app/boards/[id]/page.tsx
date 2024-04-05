@@ -1,12 +1,11 @@
+import { getBoard } from "@/app/lib/data";
 import { BoardT } from "@/app/types";
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default async function Page({ params }: { params: { id: number } }) {
   const { id } = params;
-
-  const response = await fetch(`${baseUrl}/api/board/${id}`);
-  const board = (await response.json()) as BoardT;
+  const board = await getBoard(id);
 
   return (
     <div className="flex flex-row flex-nowrap overflow-y-scroll gap-4">
